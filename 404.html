@@ -121,20 +121,19 @@
       font-family: 'Inter', sans-serif;
       font-size: 0.95rem;
       font-weight: 600;
-      color: var(--text-primary);
-      background: var(--surface);
-      border: 1px solid var(--border);
+      color: white;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+      border: none;
       border-radius: 8px;
       text-decoration: none;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
     }
 
     .home-btn:hover {
-      border-color: var(--text-secondary);
-      box-shadow: var(--shadow-md);
       transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
     }
 
     .home-btn:active {
@@ -167,7 +166,7 @@
     }
 
     .suggestion-links a {
-      color: var(--text-secondary);
+      color: var(--accent);
       text-decoration: none;
       font-size: 0.9rem;
       font-weight: 500;
@@ -182,12 +181,12 @@
       left: 0;
       width: 0;
       height: 1px;
-      background: var(--text-secondary);
+      background: var(--accent);
       transition: width 0.2s ease;
     }
 
     .suggestion-links a:hover {
-      color: var(--text-primary);
+      color: var(--accent-light);
     }
 
     .suggestion-links a:hover::after {
