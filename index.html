@@ -8,385 +8,427 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --color-primary: #1a1a1a;
-      --color-bg: #FAFAFA;
-      --color-surface: #FFFFFF;
-      --color-border: #E5E5E5;
-      --text-main: #111111;
-      --text-secondary: #666666;
-      --text-light: #999999;
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --space-xs: 4px;
-      --space-sm: 8px;
-      --space-md: 16px;
-      --space-lg: 24px;
-      --space-xl: 32px;
-      --space-2xl: 48px;
-      --space-3xl: 80px;
-    }
-
-    html {
-      scroll-behavior: smooth;
+      --blue: #4285F4;
+      --green: #34A853;
+      --yellow: #FBBC05;
+      --red: #EA4335;
+      --bg: #FFFFFF;
+      --surface: #F8F9FA;
+      --border: #E8EAED;
+      --text-1: #202124;
+      --text-2: #5F6368;
+      --text-3: #80868B;
+      --radius: 12px;
+      --easing: cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     body {
-      background: var(--color-bg);
-      color: var(--text-main);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
-      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text-1);
+      font-family: "Google Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
-    .container {
-      max-width: 680px;
+    .wrap {
+      max-width: 960px;
       margin: 0 auto;
-      padding: 0 var(--space-lg);
+      padding: 0 40px;
     }
 
-    /* Header */
-    .header {
-      padding: var(--space-2xl) 0;
+    /* Nav */
+    nav {
+      padding: 20px 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .logo {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text-main);
+    .brand {
+      font-size: 22px;
+      font-weight: 500;
       text-decoration: none;
+      color: var(--text-1);
+      letter-spacing: -0.02em;
     }
 
-    .header-links {
-      display: flex;
-      gap: var(--space-lg);
-    }
+    .brand span { color: var(--blue); }
 
-    .header-links a {
+    .nav-links { display: flex; gap: 32px; }
+
+    .nav-links a {
       font-size: 14px;
-      color: var(--text-secondary);
+      font-weight: 500;
+      color: var(--text-2);
       text-decoration: none;
       transition: color 0.2s;
     }
 
-    .header-links a:hover {
-      color: var(--text-main);
-    }
+    .nav-links a:hover { color: var(--blue); }
 
     /* Hero */
     .hero {
-      padding: var(--space-3xl) 0;
+      padding: 100px 0 80px;
+      text-align: center;
     }
 
-    .avatar {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: var(--text-main);
-      color: white;
-      display: flex;
+    .hero-badge {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      font-weight: 500;
-      margin-bottom: var(--space-lg);
+      gap: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 13px;
+      color: var(--text-2);
+      margin-bottom: 32px;
+    }
+
+    .hero-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
     }
 
     .hero h1 {
-      font-size: 32px;
-      font-weight: 600;
-      line-height: 1.3;
-      margin-bottom: var(--space-md);
-      letter-spacing: -0.02em;
+      font-size: 52px;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 .gradient {
+      background: linear-gradient(135deg, var(--blue), var(--green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .hero p {
-      font-size: 16px;
-      color: var(--text-secondary);
+      font-size: 18px;
+      color: var(--text-2);
+      max-width: 520px;
+      margin: 0 auto;
       line-height: 1.7;
-      max-width: 540px;
     }
 
     /* Section */
     .section {
-      padding: var(--space-2xl) 0;
-      border-top: 1px solid var(--color-border);
+      padding: 64px 0;
     }
 
-    .section-title {
+    .section-label {
       font-size: 12px;
       font-weight: 600;
-      color: var(--text-light);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: var(--space-lg);
+      letter-spacing: 0.08em;
+      color: var(--blue);
+      margin-bottom: 32px;
     }
 
-    /* Projects */
-    .project-list {
+    /* Tech Stack */
+    .tech-row {
       display: flex;
-      flex-direction: column;
-      gap: var(--space-md);
-    }
-
-    .project-item {
-      display: flex;
-      gap: var(--space-md);
-      padding: var(--space-md);
-      background: var(--color-surface);
-      border-radius: var(--radius-sm);
-      text-decoration: none;
-      color: inherit;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .project-item:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-
-    .project-icon {
-      width: 40px;
-      height: 40px;
-      background: var(--color-bg);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .project-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .project-info h3 {
-      font-size: 15px;
-      font-weight: 500;
-      margin-bottom: 2px;
-      color: var(--text-main);
-    }
-
-    .project-info p {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
-    /* Writing */
-    .writing-list {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .writing-item {
-      padding: var(--space-md) 0;
-      border-bottom: 1px solid var(--color-border);
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-
-    .writing-item:last-child {
-      border-bottom: none;
-    }
-
-    .writing-item:hover h3 {
-      color: var(--text-secondary);
-    }
-
-    .writing-item h3 {
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--text-main);
-      margin-bottom: 4px;
-      transition: color 0.2s;
-    }
-
-    .writing-item p {
-      font-size: 14px;
-      color: var(--text-light);
-      line-height: 1.5;
-    }
-
-    .writing-meta {
-      display: flex;
-      gap: var(--space-md);
-      margin-top: var(--space-xs);
-      font-size: 12px;
-      color: var(--text-light);
-    }
-
-    /* Links */
-    .links-grid {
-      display: flex;
-      gap: var(--space-md);
+      gap: 12px;
       flex-wrap: wrap;
     }
 
-    .link-item {
-      font-size: 14px;
-      color: var(--text-secondary);
-      text-decoration: none;
-      padding: var(--space-sm) 0;
-      display: flex;
+    .tech-chip {
+      display: inline-flex;
       align-items: center;
-      gap: var(--space-sm);
-      transition: color 0.2s;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 14px;
+      color: var(--text-1);
+      transition: all 0.2s var(--easing);
     }
 
-    .link-item:hover {
-      color: var(--text-main);
+    .tech-chip:hover {
+      border-color: var(--blue);
+      box-shadow: 0 2px 8px rgba(66,133,244,0.12);
     }
 
-    .link-item svg {
-      width: 16px;
-      height: 16px;
+    .tech-chip .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s var(--easing);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--green));
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .project-card:hover {
+      border-color: transparent;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+
+    .project-card:hover::before { opacity: 1; }
+
+    .project-card h3 {
+      font-size: 17px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .project-card p {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .project-tags span {
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: rgba(66,133,244,0.08);
+      color: var(--blue);
+    }
+
+    /* Links */
+    .links-row {
+      display: flex;
+      gap: 16px;
+    }
+
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s var(--easing);
+    }
+
+    .link-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .link-primary {
+      background: var(--blue);
+      color: white;
+    }
+
+    .link-primary:hover {
+      background: #3367D6;
+      box-shadow: 0 4px 12px rgba(66,133,244,0.3);
+    }
+
+    .link-secondary {
+      background: var(--surface);
+      color: var(--text-1);
+      border: 1px solid var(--border);
+    }
+
+    .link-secondary:hover {
+      border-color: var(--blue);
+      color: var(--blue);
     }
 
     /* Footer */
-    .footer {
-      padding: var(--space-2xl) 0;
-      margin-top: var(--space-xl);
-      border-top: 1px solid var(--color-border);
+    footer {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+      margin-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .footer p {
+    footer p {
       font-size: 13px;
-      color: var(--text-light);
+      color: var(--text-3);
     }
 
-    /* Mobile */
-    @media (max-width: 640px) {
-      .hero h1 {
-        font-size: 26px;
-      }
+    footer .socials {
+      display: flex;
+      gap: 16px;
+    }
 
-      .header-links {
-        gap: var(--space-md);
-      }
+    footer .socials a {
+      color: var(--text-3);
+      transition: color 0.2s;
+    }
 
-      .links-grid {
-        flex-direction: column;
-        gap: var(--space-sm);
-      }
+    footer .socials a:hover { color: var(--text-1); }
+
+    footer .socials svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .wrap { padding: 0 20px; }
+      .hero h1 { font-size: 36px; }
+      .hero { padding: 64px 0 48px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .links-row { flex-direction: column; }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header class="header">
-      <a href="#" class="logo">noteasy</a>
-      <nav class="header-links">
+  <div class="wrap">
+    <nav>
+      <a href="#" class="brand">noteasy<span>.</span></a>
+      <div class="nav-links">
         <a href="#projects">项目</a>
-        <a href="#writing">文章</a>
-        <a href="#about">关于</a>
-      </nav>
-    </header>
+        <a href="#stack">技术栈</a>
+        <a href="#contact">联系</a>
+      </div>
+    </nav>
 
     <section class="hero">
-      <div class="avatar">N</div>
-      <h1>你好，我是 noteasy</h1>
-      <p>开发者 / 开源爱好者 / 终身学习者<br>喜欢捣鼓一些有趣的小项目，也在写一些技术文章。</p>
+      <div class="hero-badge">
+        <div class="dot"></div>
+        Available for collaboration
+      </div>
+      <h1>构建优雅的<br><span class="gradient">数字体验</span></h1>
+      <p>嗨，我是 noteasy。一名热爱编程的开发者，专注于后端架构与全栈开发，喜欢用代码解决有趣的问题。</p>
+    </section>
+
+    <section class="section" id="stack">
+      <p class="section-label">技术栈</p>
+      <div class="tech-row">
+        <div class="tech-chip"><span class="dot" style="background:var(--blue)"></span>Go</div>
+        <div class="tech-chip"><span class="dot" style="background:var(--green)"></span>Python</div>
+        <div class="tech-chip"><span class="dot" style="background:var(--yellow)"></span>JavaScript</div>
+        <div class="tech-chip"><span class="dot" style="background:var(--red)"></span>Rust</div>
+        <div class="tech-chip"><span class="dot" style="background:var(--blue)"></span>Docker</div>
+        <div class="tech-chip"><span class="dot" style="background:var(--green)"></span>Linux</div>
+        <div class="tech-chip"><span class="dot" style="background:var(--yellow)"></span>PostgreSQL</div>
+        <div class="tech-chip"><span class="dot" style="background:var(--red)"></span>Redis</div>
+      </div>
     </section>
 
     <section class="section" id="projects">
-      <h2 class="section-title">项目</h2>
-      <div class="project-list">
-        <a href="#" class="project-item">
-          <div class="project-icon">🚀</div>
-          <div class="project-info">
-            <h3>项目名称</h3>
-            <p>项目的简短描述，说明这是做什么的</p>
+      <p class="section-label">项目</p>
+      <div class="projects-grid">
+        <a href="#" class="project-card">
+          <h3>项目名称</h3>
+          <p>简洁的项目描述，说明核心功能和价值</p>
+          <div class="project-tags">
+            <span>Go</span>
+            <span>gRPC</span>
           </div>
         </a>
-        <a href="#" class="project-item">
-          <div class="project-icon">⚡</div>
-          <div class="project-info">
-            <h3>另一个项目</h3>
-            <p>这个项目的描述，同样简洁明了</p>
+        <a href="#" class="project-card">
+          <h3>另一个项目</h3>
+          <p>用一句话概括这个项目解决了什么问题</p>
+          <div class="project-tags">
+            <span>Python</span>
+            <span>FastAPI</span>
           </div>
         </a>
-        <a href="#" class="project-item">
-          <div class="project-icon">📦</div>
-          <div class="project-info">
-            <h3>工具库</h3>
-            <p>一些常用的工具函数集合</p>
+        <a href="#" class="project-card">
+          <h3>开源工具</h3>
+          <p>提升开发效率的命令行工具或库</p>
+          <div class="project-tags">
+            <span>Rust</span>
+            <span>CLI</span>
           </div>
         </a>
-      </div>
-    </section>
-
-    <section class="section" id="writing">
-      <h2 class="section-title">文章</h2>
-      <div class="writing-list">
-        <a href="#" class="writing-item">
-          <h3>文章标题一</h3>
-          <p>文章简介，描述这篇文章讲了什么</p>
-          <div class="writing-meta">
-            <span>2024-01</span>
-            <span>5 min read</span>
-          </div>
-        </a>
-        <a href="#" class="writing-item">
-          <h3>另一篇文章</h3>
-          <p>简短介绍这篇文章的核心内容</p>
-          <div class="writing-meta">
-            <span>2024-01</span>
-            <span>3 min read</span>
-          </div>
-        </a>
-        <a href="#" class="writing-item">
-          <h3>技术踩坑记录</h3>
-          <p>记录开发过程中遇到的问题和解决方案</p>
-          <div class="writing-meta">
-            <span>2024-01</span>
-            <span>2 min read</span>
+        <a href="#" class="project-card">
+          <h3>Side Project</h3>
+          <p>业余时间做的一些有趣的实验性项目</p>
+          <div class="project-tags">
+            <span>TypeScript</span>
+            <span>React</span>
           </div>
         </a>
       </div>
     </section>
 
-    <section class="section" id="about">
-      <h2 class="section-title">关于</h2>
-      <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.8;">
-        目前主要做后端开发，偶尔写写前端。对新技术充满好奇，乐于分享。<br><br>
-        在这里记录学习过程中的思考和总结，也欢迎交流探讨。
-      </p>
-    </section>
-
-    <section class="section">
-      <h2 class="section-title">联系方式</h2>
-      <div class="links-grid">
-        <a href="#" class="link-item">
+    <section class="section" id="contact">
+      <p class="section-label">联系我</p>
+      <div class="links-row">
+        <a href="#" class="link-btn link-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          发送邮件
+        </a>
+        <a href="#" class="link-btn link-secondary">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
           </svg>
           GitHub
         </a>
-        <a href="#" class="link-item">
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2024 noteasy</p>
+      <div class="socials">
+        <a href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+        </a>
+        <a href="#">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
             <polyline points="22,6 12,13 2,6"/>
           </svg>
-          Email
         </a>
-        <a href="#" class="link-item">
+        <a href="#">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
           </svg>
-          Twitter
         </a>
       </div>
-    </section>
-
-    <footer class="footer">
-      <p>© 2024 noteasy</p>
     </footer>
   </div>
 </body>
