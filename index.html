@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GitHub Proxy</title>
+  <title>noteasy</title>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -104,38 +104,40 @@
     /* Cards */
     .cards-grid {
       display: grid;
-      gap: var(--space-lg);
-      max-width: 720px;
+      gap: var(--space-md);
+      max-width: 560px;
       margin: 0 auto;
-      padding-bottom: var(--space-3xl);
+      padding-bottom: var(--space-2xl);
     }
 
     .card {
       background: var(--color-surface);
-      border-radius: var(--radius-md);
-      padding: var(--space-lg);
+      border-radius: var(--radius-sm);
+      padding: var(--space-sm) var(--space-md);
       text-decoration: none;
       color: inherit;
       transition: all 200ms var(--easing);
       box-shadow: var(--shadow-1);
       display: flex;
-      align-items: flex-start;
-      gap: var(--space-md);
+      align-items: center;
+      gap: var(--space-sm);
       opacity: 0;
-      transform: translateY(16px);
+      transform: translateY(12px);
       animation: fadeInUp 0.4s var(--easing) forwards;
     }
 
     .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.15s; }
+    .card:nth-child(3) { animation-delay: 0.2s; }
 
     .card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-2px);
       box-shadow: var(--shadow-2);
     }
 
     .card-icon {
-      width: 40px;
-      height: 40px;
+      width: 32px;
+      height: 32px;
       background: var(--color-primary-bg);
       border-radius: var(--radius-sm);
       display: flex;
@@ -150,8 +152,8 @@
     }
 
     .card-icon svg {
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
       stroke: var(--color-primary);
       transition: stroke 200ms var(--easing);
     }
@@ -165,16 +167,16 @@
     }
 
     .card h3 {
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 600;
-      margin-bottom: var(--space-xs);
+      margin-bottom: 2px;
       color: var(--text-main);
     }
 
     .card p {
-      font-size: 14px;
+      font-size: 12px;
       color: var(--text-secondary);
-      line-height: 1.6;
+      line-height: 1.5;
     }
 
     .card-arrow {
@@ -189,8 +191,8 @@
     }
 
     .card-arrow svg {
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
       stroke: var(--text-secondary);
     }
 
@@ -264,8 +266,8 @@
         <div class="status-dot"></div>
         系统运行中
       </div>
-      <h1>GitHub Proxy</h1>
-      <p class="subtitle">简洁高效的工具，助力你的开发工作流程</p>
+      <h1>noteasy</h1>
+      <p class="subtitle">实用工具集合，让工作更轻松</p>
     </header>
 
     <div class="cards-grid">
@@ -279,7 +281,47 @@
         </div>
         <div class="card-content">
           <h3>GitHub 文件加速</h3>
-          <p>快速下载 GitHub 上的 release、源码包和文件</p>
+          <p>快速下载 GitHub 资源文件</p>
+        </div>
+        <div class="card-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </div>
+      </a>
+
+      <a href="/tools/converter" class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 20V10"/>
+            <path d="M6 20V4"/>
+            <path d="M18 20L6 10"/>
+          </svg>
+        </div>
+        <div class="card-content">
+          <h3>格式转换器</h3>
+          <p>在线转换各种文件格式</p>
+        </div>
+        <div class="card-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </div>
+      </a>
+
+      <a href="/tools/compressor" class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M8 15s1.5-2 4-2 4 2 4 2"/>
+            <circle cx="12" cy="9" r="3"/>
+          </svg>
+        </div>
+        <div class="card-content">
+          <h3>图片压缩</h3>
+          <p>快速压缩图片大小</p>
         </div>
         <div class="card-arrow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -294,8 +336,9 @@
       <div class="footer-links">
         <a href="https://github.com/hunshcn/gh-proxy">GitHub</a>
         <a href="#">文档</a>
+        <a href="/about">关于我们</a>
       </div>
-      <p class="copyright">© 2024 简洁高效的工具</p>
+      <p class="copyright">© 2024 noteasy. All rights reserved.</p>
     </footer>
   </div>
 </body>
