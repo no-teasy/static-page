@@ -4,28 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GitHub 文件加速</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #fafafa;
-      --surface: #ffffff;
-      --text-primary: #1a1a2e;
-      --text-secondary: #64748b;
-      --text-tertiary: #94a3b8;
-      --accent: #6366f1;
-      --accent-light: #818cf8;
-      --accent-bg: #eef2ff;
-      --border: #e2e8f0;
-      --success: #10b981;
-      --success-bg: #ecfdf5;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
-      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
-      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.03);
-      --radius: 12px;
+      /* 设计令牌 */
+      --color-primary: #2563EB;
+      --color-primary-hover: #1D4ED8;
+      --color-primary-bg: #EFF6FF;
+      --color-bg: #F8FAFC;
+      --color-surface: #FFFFFF;
+      --color-border: #E2E8F0;
+      --text-main: #0F172A;
+      --text-secondary: #64748B;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --shadow-1: 0 1px 2px rgba(15,23,42,0.04), 0 1px 3px rgba(15,23,42,0.06);
+      --shadow-2: 0 4px 6px -2px rgba(15,23,42,0.05), 0 8px 12px -2px rgba(15,23,42,0.08);
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-2xl: 48px;
+      --easing: cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     html {
@@ -33,9 +35,9 @@
     }
 
     body {
-      background: var(--bg);
-      color: var(--text-primary);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--color-bg);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
       min-height: 100vh;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
@@ -43,220 +45,218 @@
     }
 
     .container {
-      max-width: 640px;
+      max-width: 720px;
       margin: 0 auto;
-      padding: 80px 24px;
+      padding: var(--space-2xl) var(--space-xl);
     }
 
+    /* Header */
     .header {
       text-align: center;
-      margin-bottom: 48px;
+      margin-bottom: var(--space-xl);
       opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.6s ease forwards;
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
-      margin-bottom: 32px;
-      transition: color 0.2s ease;
-    }
-
-    .back-link:hover {
-      color: var(--accent);
-    }
-
-    .back-link svg {
-      width: 16px;
-      height: 16px;
+      transform: translateY(16px);
+      animation: fadeInUp 0.4s var(--easing) forwards;
     }
 
     h1 {
-      font-size: 1.75rem;
+      font-size: 24px;
+      line-height: 1.4;
       font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
+      margin-bottom: var(--space-sm);
+      color: var(--text-main);
     }
 
     .subtitle {
-      font-size: 0.95rem;
+      font-size: 14px;
       color: var(--text-secondary);
     }
 
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
+    /* Form Card */
     .form-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px;
-      box-shadow: var(--shadow-md);
+      background: var(--color-surface);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      box-shadow: var(--shadow-1);
+      margin-bottom: var(--space-lg);
       opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.6s ease forwards 0.2s;
+      transform: translateY(16px);
+      animation: fadeInUp 0.4s var(--easing) forwards 0.1s;
     }
 
-    .input-group {
-      margin-bottom: 20px;
+    .form-group {
+      margin-bottom: var(--space-md);
     }
 
-    .input-wrapper {
-      position: relative;
-    }
-
-    .input-label {
+    .form-label {
       display: block;
-      font-size: 0.8rem;
+      font-size: 12px;
       font-weight: 500;
       color: var(--text-secondary);
-      margin-bottom: 8px;
+      margin-bottom: var(--space-xs);
       letter-spacing: 0.02em;
     }
 
     .url-input {
       width: 100%;
-      padding: 14px 16px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--bg);
-      color: var(--text-primary);
-      transition: all 0.2s ease;
+      padding: 10px 14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 14px;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      transition: all 150ms var(--easing);
+      outline: none;
     }
 
     .url-input::placeholder {
-      color: var(--text-tertiary);
+      color: var(--text-secondary);
     }
 
     .url-input:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-bg);
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
     }
 
     .submit-btn {
       width: 100%;
-      padding: 14px 24px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 600;
+      padding: 10px 20px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
       color: white;
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+      background: var(--color-primary);
       border: none;
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+      transition: all 150ms var(--easing);
+      min-height: 44px;
     }
 
     .submit-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+      background: var(--color-primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 6px -4px rgba(0,0,0,0.1);
     }
 
     .submit-btn:active {
       transform: translateY(0);
     }
 
-    .tips {
-      margin-top: 32px;
-      padding: 20px;
-      background: var(--accent-bg);
-      border-radius: var(--radius);
+    /* Info Section */
+    .info-section {
+      background: var(--color-primary-bg);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      margin-bottom: var(--space-lg);
       opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.6s ease forwards 0.4s;
+      transform: translateY(16px);
+      animation: fadeInUp 0.4s var(--easing) forwards 0.2s;
     }
 
-    .tips-title {
+    .info-title {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.85rem;
+      gap: var(--space-xs);
+      font-size: 12px;
       font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 12px;
+      color: var(--color-primary);
+      margin-bottom: var(--space-sm);
     }
 
-    .tips-title svg {
+    .info-title svg {
       width: 16px;
       height: 16px;
     }
 
-    .tips p {
-      font-size: 0.85rem;
+    .info-text {
+      font-size: 14px;
       color: var(--text-secondary);
       line-height: 1.7;
-      margin-bottom: 8px;
     }
 
-    .tips p:last-child {
+    .info-text p {
+      margin-bottom: var(--space-xs);
+    }
+
+    .info-text p:last-child {
       margin-bottom: 0;
     }
 
-    .examples {
-      margin-top: 24px;
+    /* Examples */
+    .examples-section {
       opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.6s ease forwards 0.6s;
+      transform: translateY(16px);
+      animation: fadeInUp 0.4s var(--easing) forwards 0.3s;
     }
 
     .examples-title {
-      font-size: 0.8rem;
+      font-size: 12px;
       font-weight: 500;
-      color: var(--text-tertiary);
+      color: var(--text-secondary);
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      margin-bottom: 12px;
+      margin-bottom: var(--space-sm);
     }
 
-    .example-list {
+    .examples-list {
       list-style: none;
+      background: var(--color-surface);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      box-shadow: var(--shadow-1);
     }
 
-    .example-list li {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
+    .examples-list li {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
       color: var(--text-secondary);
-      padding: 8px 0;
-      border-bottom: 1px solid var(--border);
+      padding: var(--space-sm) 0;
+      border-bottom: 1px solid var(--color-border);
+      word-break: break-all;
     }
 
-    .example-list li:last-child {
+    .examples-list li:last-child {
       border-bottom: none;
+      padding-bottom: 0;
     }
 
-    .example-list li::before {
-      content: '→';
-      margin-right: 8px;
-      color: var(--accent);
+    .examples-list li:first-child {
+      padding-top: 0;
     }
 
+    .examples-list li::before {
+      content: "→";
+      margin-right: var(--space-xs);
+      color: var(--color-primary);
+    }
+
+    /* Footer */
     .footer {
-      margin-top: 48px;
+      margin-top: var(--space-2xl);
       text-align: center;
       opacity: 0;
-      animation: fadeUp 0.6s ease forwards 0.8s;
+      animation: fadeInUp 0.4s var(--easing) forwards 0.4s;
     }
 
     .footer p {
-      font-size: 0.8rem;
-      color: var(--text-tertiary);
+      font-size: 12px;
+      color: var(--text-secondary);
     }
 
     .footer a {
-      color: var(--accent);
+      color: var(--color-primary);
       text-decoration: none;
       font-weight: 500;
+      transition: color 150ms var(--easing);
     }
 
     .footer a:hover {
@@ -265,70 +265,68 @@
 
     @media (max-width: 640px) {
       .container {
-        padding: 60px 20px;
+        padding: var(--space-xl) var(--space-md);
+      }
+
+      h1 {
+        font-size: 20px;
       }
 
       .form-card {
-        padding: 24px;
+        padding: var(--space-md);
       }
 
-      .tips {
-        padding: 16px;
+      .info-section {
+        padding: var(--space-md);
       }
     }
   </style>
 </head>
 <body>
-  <main class="container">
+  <div class="container">
     <header class="header">
-      <a href="/" class="back-link">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M19 12H5"/>
-          <path d="M12 19l-7-7 7-7"/>
-        </svg>
-        返回首页
-      </a>
       <h1>GitHub 文件加速</h1>
       <p class="subtitle">快速下载 GitHub 上的 release、源码包和文件</p>
     </header>
 
     <div class="form-card">
       <form action="./" method="get" target="_blank" onsubmit="toSubmit(event)">
-        <div class="input-group">
-          <label class="input-label">GitHub 链接</label>
-          <div class="input-wrapper">
-            <input 
-              class="url-input" 
-              name="q" 
-              type="text" 
-              placeholder="https://github.com/user/repo/archive/main.zip"
-              pattern="^((https|http):\/\/)?(github\.com\/.+?\/.+?\/(?:releases|archive|blob|raw|suites)|((?:raw|gist)\.(?:githubusercontent|github)\.com))\/.+$" 
-              required
-            >
-          </div>
+        <div class="form-group">
+          <label class="form-label" for="url-input">GitHub 链接</label>
+          <input 
+            class="url-input" 
+            id="url-input"
+            name="q" 
+            type="text" 
+            placeholder="https://github.com/user/repo/archive/main.zip"
+            pattern="^((https|http):\/\/)?(github\.com\/.+?\/.+?\/(?:releases|archive|blob|raw|suites)|((?:raw|gist)\.(?:githubusercontent|github)\.com))\/.+$" 
+            required
+          >
         </div>
         <button type="submit" class="submit-btn">下载文件</button>
       </form>
     </div>
 
-    <div class="tips">
-      <div class="tips-title">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <div class="info-section">
+      <div class="info-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10"/>
           <path d="M12 16v-4"/>
           <path d="M12 8h.01"/>
         </svg>
         使用说明
       </div>
-      <p>• GitHub 文件链接带不带协议头都可以</p>
-      <p>• 支持 release、archive 以及文件下载</p>
-      <p>• 右键复制出来的链接都是符合标准的</p>
-      <p>• 注意：不支持项目文件夹</p>
+      <div class="info-text">
+        <p>• GitHub 文件链接带不带协议头都可以</p>
+        <p>• 支持 release、archive 以及文件下载</p>
+        <p>• 右键复制出来的链接都是符合标准的</p>
+        <p>• 注意：不支持项目文件夹</p>
+      </div>
     </div>
 
-    <div class="examples">
+    <div class="examples-section">
       <div class="examples-title">合法输入示例</div>
-      <ul class="example-list">
+      <ul class="examples-list">
         <li>https://github.com/hunshcn/project/archive/master.zip</li>
         <li>https://github.com/hunshcn/project/releases/download/v0.1.0/example.zip</li>
         <li>https://github.com/hunshcn/project/blob/master/filename</li>
@@ -338,11 +336,11 @@
     <footer class="footer">
       <p>基于 Cloudflare Workers 构建 · <a href="https://github.com/hunshcn/gh-proxy">开源项目</a></p>
     </footer>
-  </main>
+  </div>
 
   <script>
-    function toSubmit(e) {
-      e.preventDefault();
+    function toSubmit(event) {
+      event.preventDefault();
       window.open(location.href.substr(0, location.href.lastIndexOf('/') + 1) + document.getElementsByName('q')[0].value);
       return false;
     }

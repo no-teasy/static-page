@@ -3,27 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <title>GitHub Proxy</title>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #fafafa;
-      --surface: #ffffff;
-      --text-primary: #1a1a2e;
-      --text-secondary: #64748b;
-      --text-tertiary: #94a3b8;
-      --accent: #6366f1;
-      --accent-light: #818cf8;
-      --accent-bg: #eef2ff;
-      --border: #e2e8f0;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
-      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
-      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.03);
-      --radius: 12px;
+      /* 设计令牌 */
+      --color-primary: #2563EB;
+      --color-primary-hover: #1D4ED8;
+      --color-primary-bg: #EFF6FF;
+      --color-bg: #F8FAFC;
+      --color-surface: #FFFFFF;
+      --color-border: #E2E8F0;
+      --text-main: #0F172A;
+      --text-secondary: #64748B;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-pill: 9999px;
+      --shadow-1: 0 1px 2px rgba(15,23,42,0.04), 0 1px 3px rgba(15,23,42,0.06);
+      --shadow-2: 0 4px 6px -2px rgba(15,23,42,0.05), 0 8px 12px -2px rgba(15,23,42,0.08);
+      --shadow-3: 0 10px 25px -5px rgba(15,23,42,0.08), 0 20px 30px -10px rgba(15,23,42,0.1);
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-2xl: 48px;
+      --space-3xl: 64px;
+      --easing: cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     html {
@@ -31,9 +38,9 @@
     }
 
     body {
-      background: var(--bg);
-      color: var(--text-primary);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--color-bg);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
       min-height: 100vh;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
@@ -41,38 +48,35 @@
     }
 
     .container {
-      max-width: 720px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 120px 24px 80px;
+      padding: 0 var(--space-xl);
     }
 
+    /* Header */
     .header {
+      padding: var(--space-2xl) 0 var(--space-3xl);
       text-align: center;
-      margin-bottom: 80px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.8s ease forwards;
     }
 
-    .badge {
+    .status-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      background: var(--accent-bg);
-      color: var(--accent);
-      font-size: 0.8rem;
+      gap: var(--space-xs);
+      padding: var(--space-xs) var(--space-sm);
+      background: var(--color-primary-bg);
+      color: var(--color-primary);
+      font-size: 12px;
       font-weight: 500;
-      border-radius: 100px;
-      margin-bottom: 24px;
+      border-radius: var(--radius-pill);
+      margin-bottom: var(--space-lg);
       letter-spacing: 0.02em;
     }
 
-    .badge::before {
-      content: '';
+    .status-dot {
       width: 6px;
       height: 6px;
-      background: var(--accent);
+      background: var(--color-primary);
       border-radius: 50%;
       animation: pulse 2s ease-in-out infinite;
     }
@@ -83,244 +87,202 @@
     }
 
     h1 {
-      font-size: clamp(2.5rem, 8vw, 4rem);
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-size: 36px;
+      line-height: 1.3;
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+      color: var(--text-main);
     }
 
     .subtitle {
-      font-size: 1.125rem;
+      font-size: 16px;
       color: var(--text-secondary);
       max-width: 480px;
       margin: 0 auto;
-      font-weight: 400;
     }
 
-    .divider {
-      width: 60px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-light));
-      margin: 48px auto;
-      border-radius: 2px;
-      opacity: 0;
-      transform: scaleX(0);
-      animation: scaleUp 0.6s ease forwards 0.4s;
-    }
-
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes scaleUp {
-      to { opacity: 1; transform: scaleX(1); }
-    }
-
-    .cards {
+    /* Cards */
+    .cards-grid {
       display: grid;
-      gap: 16px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.8s ease forwards 0.6s;
+      gap: var(--space-lg);
+      max-width: 720px;
+      margin: 0 auto;
+      padding-bottom: var(--space-3xl);
     }
 
     .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
+      background: var(--color-surface);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
       text-decoration: none;
       color: inherit;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: var(--shadow-sm);
-      position: relative;
-      overflow: hidden;
+      transition: all 200ms var(--easing);
+      box-shadow: var(--shadow-1);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeInUp 0.4s var(--easing) forwards;
     }
 
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-light));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s ease;
-    }
+    .card:nth-child(1) { animation-delay: 0.1s; }
 
     .card:hover {
-      border-color: var(--accent-light);
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-2px);
-    }
-
-    .card:hover::before {
-      transform: scaleX(1);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-2);
     }
 
     .card-icon {
       width: 40px;
       height: 40px;
-      background: var(--accent-bg);
-      border-radius: 10px;
+      background: var(--color-primary-bg);
+      border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 16px;
-      transition: all 0.3s ease;
+      flex-shrink: 0;
+      transition: all 200ms var(--easing);
     }
 
     .card:hover .card-icon {
-      background: var(--accent);
+      background: var(--color-primary);
     }
 
     .card-icon svg {
       width: 20px;
       height: 20px;
-      stroke: var(--accent);
-      transition: stroke 0.3s ease;
+      stroke: var(--color-primary);
+      transition: stroke 200ms var(--easing);
     }
 
     .card:hover .card-icon svg {
       stroke: white;
     }
 
+    .card-content {
+      flex: 1;
+    }
+
     .card h3 {
-      font-size: 1.1rem;
+      font-size: 20px;
       font-weight: 600;
-      margin-bottom: 8px;
-      color: var(--text-primary);
+      margin-bottom: var(--space-xs);
+      color: var(--text-main);
     }
 
     .card p {
-      font-size: 0.9rem;
+      font-size: 14px;
       color: var(--text-secondary);
       line-height: 1.6;
     }
 
     .card-arrow {
-      position: absolute;
-      right: 24px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 20px;
-      height: 20px;
       opacity: 0;
-      transition: all 0.3s ease;
+      transform: translateX(-4px);
+      transition: all 200ms var(--easing);
     }
 
     .card:hover .card-arrow {
       opacity: 1;
-      transform: translateY(-50%) translateX(4px);
+      transform: translateX(0);
     }
 
     .card-arrow svg {
-      width: 100%;
-      height: 100%;
-      stroke: var(--text-tertiary);
+      width: 20px;
+      height: 20px;
+      stroke: var(--text-secondary);
     }
 
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Footer */
     .footer {
-      margin-top: 80px;
+      padding: var(--space-2xl) 0;
       text-align: center;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.8s;
+      border-top: 1px solid var(--color-border);
+      margin-top: var(--space-2xl);
     }
 
     .footer-links {
       display: flex;
       justify-content: center;
-      gap: 32px;
-      margin-bottom: 24px;
+      gap: var(--space-lg);
+      margin-bottom: var(--space-md);
     }
 
     .footer-links a {
       color: var(--text-secondary);
       text-decoration: none;
-      font-size: 0.85rem;
+      font-size: 14px;
       font-weight: 500;
-      transition: color 0.2s ease;
-      position: relative;
-    }
-
-    .footer-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--accent);
-      transition: width 0.2s ease;
+      transition: color 150ms var(--easing);
     }
 
     .footer-links a:hover {
-      color: var(--accent);
-    }
-
-    .footer-links a:hover::after {
-      width: 100%;
+      color: var(--color-primary);
     }
 
     .copyright {
-      font-size: 0.8rem;
-      color: var(--text-tertiary);
+      font-size: 12px;
+      color: var(--text-secondary);
     }
 
     @media (max-width: 640px) {
       .container {
-        padding: 80px 20px 60px;
+        padding: 0 var(--space-md);
+      }
+
+      h1 {
+        font-size: 28px;
       }
 
       .header {
-        margin-bottom: 60px;
-      }
-
-      .cards {
-        gap: 12px;
+        padding: var(--space-xl) 0 var(--space-2xl);
       }
 
       .card {
-        padding: 20px;
+        padding: var(--space-md);
       }
 
       .footer-links {
         flex-direction: column;
-        gap: 16px;
+        gap: var(--space-md);
       }
     }
   </style>
 </head>
 <body>
-  <main class="container">
+  <div class="container">
     <header class="header">
-      <div class="badge">系统运行中</div>
-      <h1>Welcome</h1>
-      <p class="subtitle">简洁高效的工具集，助力你的开发工作流程</p>
+      <div class="status-badge">
+        <div class="status-dot"></div>
+        系统运行中
+      </div>
+      <h1>GitHub Proxy</h1>
+      <p class="subtitle">简洁高效的工具，助力你的开发工作流程</p>
     </header>
 
-    <div class="divider"></div>
-
-    <div class="cards">
+    <div class="cards-grid">
       <a href="/gh-proxy/" class="card">
         <div class="card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
             <polyline points="7 10 12 15 17 10"/>
             <line x1="12" y1="15" x2="12" y2="3"/>
           </svg>
         </div>
-        <h3>GitHub 文件加速</h3>
-        <p>快速下载 GitHub 上的 release、源码包和文件</p>
+        <div class="card-content">
+          <h3>GitHub 文件加速</h3>
+          <p>快速下载 GitHub 上的 release、源码包和文件</p>
+        </div>
         <div class="card-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"/>
             <polyline points="12 5 19 12 12 19"/>
           </svg>
@@ -329,13 +291,12 @@
     </div>
 
     <footer class="footer">
-      <nav class="footer-links">
+      <div class="footer-links">
+        <a href="https://github.com/hunshcn/gh-proxy">GitHub</a>
         <a href="#">文档</a>
-        <a href="#">GitHub</a>
-        <a href="#">关于</a>
-      </nav>
-      <p class="copyright">© 2024 Built with simplicity</p>
+      </div>
+      <p class="copyright">© 2024 简洁高效的工具</p>
     </footer>
-  </main>
+  </div>
 </body>
 </html>
