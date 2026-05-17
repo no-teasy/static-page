@@ -3,351 +3,339 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hello World</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <title>Welcome</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #0a0a0f;
-      --fg: #e8e6e3;
-      --accent: #ff3c38;
-      --accent2: #00f0ff;
-      --muted: #4a4a5a;
-      --glow-accent: rgba(255, 60, 56, 0.6);
-      --glow-cyan: rgba(0, 240, 255, 0.5);
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --text-primary: #1a1a2e;
+      --text-secondary: #64748b;
+      --text-tertiary: #94a3b8;
+      --accent: #6366f1;
+      --accent-light: #818cf8;
+      --accent-bg: #eef2ff;
+      --border: #e2e8f0;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.03);
+      --radius: 12px;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
       background: var(--bg);
-      color: var(--fg);
-      font-family: 'Space Mono', monospace;
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* ── 背景网格 ── */
-    .grid-bg {
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-      z-index: 0;
-    }
-
-    /* ── 渐变光晕 ── */
-    .glow-orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(120px);
-      z-index: 0;
-      animation: orbFloat 8s ease-in-out infinite alternate;
-    }
-    .glow-orb.orb1 {
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, var(--glow-accent), transparent 70%);
-      top: -10%; left: -10%;
-      animation-duration: 10s;
-    }
-    .glow-orb.orb2 {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, var(--glow-cyan), transparent 70%);
-      bottom: -10%; right: -10%;
-      animation-duration: 12s;
-      animation-delay: -4s;
-    }
-    .glow-orb.orb3 {
-      width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(160, 60, 255, 0.3), transparent 70%);
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      animation-duration: 9s;
-      animation-delay: -2s;
-    }
-
-    @keyframes orbFloat {
-      0%   { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(40px, -30px) scale(1.15); }
-    }
-
-    /* ── 噪点纹理 ── */
-    .noise {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      opacity: 0.035;
-      pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size: 128px 128px;
-    }
-
-    /* ── 扫描线 ── */
-    .scanlines {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0,0,0,0.08) 2px,
-        rgba(0,0,0,0.08) 4px
-      );
-    }
-
-    /* ── 主内容 ── */
     .container {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      padding: 2rem;
-    }
-
-    /* ── 标签 ── */
-    .tag {
-      display: inline-block;
-      font-size: 0.7rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--accent2);
-      border: 1px solid rgba(0, 240, 255, 0.3);
-      padding: 0.4em 1.2em;
-      border-radius: 100px;
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeSlideUp 0.8s ease forwards 0.3s;
-      backdrop-filter: blur(4px);
-      background: rgba(0, 240, 255, 0.05);
-    }
-
-    /* ── 主标题 ── */
-    .title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(3.5rem, 12vw, 10rem);
-      line-height: 1;
-      letter-spacing: -0.03em;
-      position: relative;
-      opacity: 0;
-      animation: titleReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s;
-    }
-
-    .title .hello {
-      display: block;
-      background: linear-gradient(135deg, var(--fg) 0%, var(--muted) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .title .world {
-      display: block;
-      background: linear-gradient(135deg, var(--accent) 0%, #ff8c42 50%, var(--accent2) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      background-size: 200% 200%;
-      animation: gradientShift 4s ease-in-out infinite alternate;
-      filter: drop-shadow(0 0 40px var(--glow-accent));
-    }
-
-    @keyframes gradientShift {
-      0%   { background-position: 0% 50%; }
-      100% { background-position: 100% 50%; }
-    }
-
-    /* ── 装饰线 ── */
-    .divider {
-      width: 80px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      margin: 2rem auto;
-      opacity: 0;
-      animation: fadeSlideUp 0.8s ease forwards 1.2s;
-      border-radius: 2px;
-    }
-
-    /* ── 副标题 ── */
-    .subtitle {
-      font-size: clamp(0.8rem, 1.5vw, 1rem);
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      line-height: 1.8;
-      max-width: 480px;
+      max-width: 720px;
       margin: 0 auto;
+      padding: 120px 24px 80px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 80px;
       opacity: 0;
-      animation: fadeSlideUp 0.8s ease forwards 1.5s;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease forwards;
     }
 
-    .subtitle .cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1em;
-      background: var(--accent2);
-      margin-left: 2px;
-      vertical-align: text-bottom;
-      animation: blink 1s step-end infinite;
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--accent-bg);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 500;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      letter-spacing: 0.02em;
     }
 
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50%      { opacity: 0; }
-    }
-
-    /* ── 底部装饰 ── */
-    .footer-info {
-      margin-top: 3rem;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      opacity: 0;
-      animation: fadeSlideUp 0.8s ease forwards 1.8s;
-    }
-
-    .footer-info .dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
+    .badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
       background: var(--accent);
+      border-radius: 50%;
       animation: pulse 2s ease-in-out infinite;
     }
 
-    .footer-info span {
-      font-size: 0.7rem;
-      color: var(--muted);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
-
     @keyframes pulse {
-      0%, 100% { opacity: 0.4; transform: scale(1); }
-      50%      { opacity: 1; transform: scale(1.3); }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
     }
 
-    /* ── 动画关键帧 ── */
-    @keyframes fadeSlideUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
+    h1 {
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    @keyframes titleReveal {
-      from { opacity: 0; transform: translateY(40px) scale(0.95); filter: blur(10px); }
-      to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    .subtitle {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin: 0 auto;
+      font-weight: 400;
     }
 
-    /* ── 粒子 ── */
-    .particles {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .particle {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      border-radius: 50%;
-      background: var(--fg);
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      margin: 48px auto;
+      border-radius: 2px;
       opacity: 0;
-      animation: particleDrift linear infinite;
+      transform: scaleX(0);
+      animation: scaleUp 0.6s ease forwards 0.4s;
     }
 
-    @keyframes particleDrift {
-      0%   { opacity: 0; transform: translateY(100vh) scale(0); }
-      10%  { opacity: 0.8; }
-      90%  { opacity: 0.8; }
-      100% { opacity: 0; transform: translateY(-10vh) scale(1); }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── 鼠标跟随光标 ── */
-    .cursor-glow {
-      position: fixed;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,60,56,0.08), transparent 70%);
-      pointer-events: none;
-      z-index: 1;
-      transform: translate(-50%, -50%);
-      transition: left 0.3s ease, top 0.3s ease;
+    @keyframes scaleUp {
+      to { opacity: 1; transform: scaleX(1); }
+    }
+
+    .cards {
+      display: grid;
+      gap: 16px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease forwards 0.6s;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      border-color: var(--accent-light);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--accent-bg);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover .card-icon {
+      background: var(--accent);
+    }
+
+    .card-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--accent);
+      transition: stroke 0.3s ease;
+    }
+
+    .card:hover .card-icon svg {
+      stroke: white;
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .card-arrow {
+      position: absolute;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover .card-arrow {
+      opacity: 1;
+      transform: translateY(-50%) translateX(4px);
+    }
+
+    .card-arrow svg {
+      width: 100%;
+      height: 100%;
+      stroke: var(--text-tertiary);
+    }
+
+    .footer {
+      margin-top: 80px;
+      text-align: center;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.8s;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 24px;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      position: relative;
+    }
+
+    .footer-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .footer-links a:hover::after {
+      width: 100%;
+    }
+
+    .copyright {
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 80px 20px 60px;
+      }
+
+      .header {
+        margin-bottom: 60px;
+      }
+
+      .cards {
+        gap: 12px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 16px;
+      }
     }
   </style>
 </head>
 <body>
-
-  <!-- 背景层 -->
-  <div class="grid-bg"></div>
-  <div class="glow-orb orb1"></div>
-  <div class="glow-orb orb2"></div>
-  <div class="glow-orb orb3"></div>
-  <div class="noise"></div>
-  <div class="scanlines"></div>
-  <div class="particles" id="particles"></div>
-  <div class="cursor-glow" id="cursorGlow"></div>
-
-  <!-- 主内容 -->
   <main class="container">
-    <div class="tag">// the journey begins</div>
-    <h1 class="title">
-      <span class="hello">Hello</span>
-      <span class="world">World</span>
-    </h1>
+    <header class="header">
+      <div class="badge">系统运行中</div>
+      <h1>Welcome</h1>
+      <p class="subtitle">简洁高效的工具集，助力你的开发工作流程</p>
+    </header>
+
     <div class="divider"></div>
-    <p class="subtitle">
-      <span id="typewriter"></span><span class="cursor"></span>
-    </p>
-    <div class="footer-info">
-      <span>HTML</span>
-      <div class="dot"></div>
-      <span>CSS</span>
-      <div class="dot"></div>
-      <span>JavaScript</span>
+
+    <div class="cards">
+      <a href="/gh-proxy/" class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+        </div>
+        <h3>GitHub 文件加速</h3>
+        <p>快速下载 GitHub 上的 release、源码包和文件</p>
+        <div class="card-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </div>
+      </a>
     </div>
+
+    <footer class="footer">
+      <nav class="footer-links">
+        <a href="#">文档</a>
+        <a href="#">GitHub</a>
+        <a href="#">关于</a>
+      </nav>
+      <p class="copyright">© 2024 Built with simplicity</p>
+    </footer>
   </main>
-
-  <script>
-    // ── 打字机效果 ──
-    const text = '万物之始，一行代码，无限可能。';
-    const el = document.getElementById('typewriter');
-    let i = 0;
-    function type() {
-      if (i < text.length) {
-        el.textContent += text.charAt(i);
-        i++;
-        setTimeout(type, 100 + Math.random() * 80);
-      }
-    }
-    setTimeout(type, 2200);
-
-    // ── 粒子生成 ──
-    const particlesContainer = document.getElementById('particles');
-    for (let i = 0; i < 40; i++) {
-      const p = document.createElement('div');
-      p.className = 'particle';
-      p.style.left = Math.random() * 100 + '%';
-      p.style.animationDuration = (6 + Math.random() * 10) + 's';
-      p.style.animationDelay = (Math.random() * 10) + 's';
-      p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
-      if (Math.random() > 0.5) {
-        p.style.background = 'var(--accent2)';
-      }
-      particlesContainer.appendChild(p);
-    }
-
-    // ── 鼠标跟随 ──
-    const glow = document.getElementById('cursorGlow');
-    document.addEventListener('mousemove', (e) => {
-      glow.style.left = e.clientX + 'px';
-      glow.style.top = e.clientY + 'px';
-    });
-  </script>
-
 </body>
 </html>

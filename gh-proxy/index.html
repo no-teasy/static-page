@@ -1,147 +1,351 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-<style>
-    html, body {
-        width: 100%;
-        margin: 0;
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub 文件加速</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --text-primary: #1a1a2e;
+      --text-secondary: #64748b;
+      --text-tertiary: #94a3b8;
+      --accent: #6366f1;
+      --accent-light: #818cf8;
+      --accent-bg: #eef2ff;
+      --border: #e2e8f0;
+      --success: #10b981;
+      --success-bg: #ecfdf5;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.03);
+      --radius: 12px;
     }
 
     html {
-        height: 100%;
+      scroll-behavior: smooth;
     }
 
     body {
-        min-height: 100%;
-        padding: 20px;
-        box-sizing: border-box;
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    p {
-        word-break: break-all;
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 80px 24px;
     }
 
-    @media (max-width: 500px) {
-        h1 {
-            margin-top: 80px;
-        }
+    .header {
+      text-align: center;
+      margin-bottom: 48px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s ease forwards;
     }
 
-    .flex {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 32px;
+      transition: color 0.2s ease;
     }
 
-    .block {
-        display: block;
-        position: relative;
+    .back-link:hover {
+      color: var(--accent);
     }
 
-    .url {
-        font-size: 18px;
-        padding: 10px 10px 10px 5px;
-        position: relative;
-        width: 300px;
-        border: none;
-        border-bottom: 1px solid #bfbfbf;
+    .back-link svg {
+      width: 16px;
+      height: 16px;
     }
 
-    input:focus {
-        outline: none;
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
     }
 
-    .bar {
-        content: '';
-        height: 2px;
-        width: 100%;
-        bottom: 0;
-        position: absolute;
-        background: #00bfb3;
-        transition: 0.2s ease transform;
-        -moz-transition: 0.2s ease transform;
-        -webkit-transition: 0.2s ease transform;
-        transform: scaleX(0);
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
     }
 
-    .url:focus ~ .bar {
-        transform: scaleX(1);
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .btn {
-        line-height: 38px;
-        background-color: #00bfb3;
-        color: #fff;
-        white-space: nowrap;
-        text-align: center;
-        font-size: 14px;
-        border: none;
-        border-radius: 2px;
-        cursor: pointer;
-        padding: 5px;
-        width: 160px;
-        margin: 30px 0;
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s ease forwards 0.2s;
     }
 
-    .tips, .example {
-        color: #7b7b7b;
-        position: relative;
-        align-self: flex-start;
-        margin-left: 7.5em;
+    .input-group {
+      margin-bottom: 20px;
     }
 
-    .tips > p:first-child::before {
-        position: absolute;
-        left: -3em;
-        content: 'PS：';
-        color: #7b7b7b
+    .input-wrapper {
+      position: relative;
     }
 
-    .example > p:first-child::before {
-        position: absolute;
-        left: -7.5em;
-        content: '合法输入示例：';
-        color: #7b7b7b
+    .input-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
     }
-</style>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <script>
-        function toSubmit(e) {
-            e.preventDefault()
-            window.open(location.href.substr(0, location.href.lastIndexOf('/') + 1) + document.getElementsByName('q')[0].value);
-            return false
-        }
-    </script>
-    <title>GitHub 文件加速</title>
+
+    .url-input {
+      width: 100%;
+      padding: 14px 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text-primary);
+      transition: all 0.2s ease;
+    }
+
+    .url-input::placeholder {
+      color: var(--text-tertiary);
+    }
+
+    .url-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-bg);
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px 24px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: white;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .tips {
+      margin-top: 32px;
+      padding: 20px;
+      background: var(--accent-bg);
+      border-radius: var(--radius);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s ease forwards 0.4s;
+    }
+
+    .tips-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .tips-title svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .tips p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+
+    .tips p:last-child {
+      margin-bottom: 0;
+    }
+
+    .examples {
+      margin-top: 24px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s ease forwards 0.6s;
+    }
+
+    .examples-title {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+
+    .example-list {
+      list-style: none;
+    }
+
+    .example-list li {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .example-list li:last-child {
+      border-bottom: none;
+    }
+
+    .example-list li::before {
+      content: '→';
+      margin-right: 8px;
+      color: var(--accent);
+    }
+
+    .footer {
+      margin-top: 48px;
+      text-align: center;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.8s;
+    }
+
+    .footer p {
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 60px 20px;
+      }
+
+      .form-card {
+        padding: 24px;
+      }
+
+      .tips {
+        padding: 16px;
+      }
+    }
+  </style>
 </head>
-<body class="flex">
-<a style="position: absolute;top: 0;right: 0;" href="https://github.com/hunshcn/gh-proxy"><img width="149" height="149" referrerPolicy="no-referrer"
-                                                                                               src="https://inews.gtimg.com/newsapp_ls/0/12025455907/0"
-                                                                                               alt="Fork me on GitHub"
-                                                                                               data-recalc-dims="1"></a>
-<h1 style="margin-bottom: 50px">GitHub 文件加速</h1>
-<form action="./" method="get" style="padding-bottom: 40px" target="_blank" class="flex" onsubmit="toSubmit(event)">
-    <label class="block" style="width: fit-content">
-        <input class="block url" name="q" type="text" placeholder="键入Github文件链接"
-               pattern="^((https|http):\/\/)?(github\.com\/.+?\/.+?\/(?:releases|archive|blob|raw|suites)|((?:raw|gist)\.(?:githubusercontent|github)\.com))\/.+$" required>
-        <div class="bar"></div>
-    </label>
-    <input class="block btn" type="submit" value="下载">
-    <div class="tips"><p>GitHub文件链接带不带协议头都可以，支持release、archive以及文件，右键复制出来的链接都是符合标准的，更多用法、clone加速请参考<a href="https://hunsh.net/archives/23/">这篇文章</a>。</p>
-        <p>release、archive使用cf加速，文件会跳转至JsDelivr</p>
-        <p>注意，不支持项目文件夹</p></div>
-    <div class="example">
-        <p>分支源码：https://github.com/hunshcn/project/archive/master.zip</p>
-        <p>release源码：https://github.com/hunshcn/project/archive/v0.1.0.tar.gz</p>
-        <p>release文件：https://github.com/hunshcn/project/releases/download/v0.1.0/example.zip</p>
-        <p>分支文件：https://github.com/hunshcn/project/blob/master/filename</p>
+<body>
+  <main class="container">
+    <header class="header">
+      <a href="/" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5"/>
+          <path d="M12 19l-7-7 7-7"/>
+        </svg>
+        返回首页
+      </a>
+      <h1>GitHub 文件加速</h1>
+      <p class="subtitle">快速下载 GitHub 上的 release、源码包和文件</p>
+    </header>
+
+    <div class="form-card">
+      <form action="./" method="get" target="_blank" onsubmit="toSubmit(event)">
+        <div class="input-group">
+          <label class="input-label">GitHub 链接</label>
+          <div class="input-wrapper">
+            <input 
+              class="url-input" 
+              name="q" 
+              type="text" 
+              placeholder="https://github.com/user/repo/archive/main.zip"
+              pattern="^((https|http):\/\/)?(github\.com\/.+?\/.+?\/(?:releases|archive|blob|raw|suites)|((?:raw|gist)\.(?:githubusercontent|github)\.com))\/.+$" 
+              required
+            >
+          </div>
+        </div>
+        <button type="submit" class="submit-btn">下载文件</button>
+      </form>
     </div>
-</form>
-<p style="position: sticky;top: calc(100% - 2.5em);">项目基于Cloudflare Workers，开源于GitHub <a style="color: #3294ea"
-                                                                                         href="https://github.com/hunshcn/gh-proxy">hunshcn/gh-proxy</a>
-</p>
+
+    <div class="tips">
+      <div class="tips-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 16v-4"/>
+          <path d="M12 8h.01"/>
+        </svg>
+        使用说明
+      </div>
+      <p>• GitHub 文件链接带不带协议头都可以</p>
+      <p>• 支持 release、archive 以及文件下载</p>
+      <p>• 右键复制出来的链接都是符合标准的</p>
+      <p>• 注意：不支持项目文件夹</p>
+    </div>
+
+    <div class="examples">
+      <div class="examples-title">合法输入示例</div>
+      <ul class="example-list">
+        <li>https://github.com/hunshcn/project/archive/master.zip</li>
+        <li>https://github.com/hunshcn/project/releases/download/v0.1.0/example.zip</li>
+        <li>https://github.com/hunshcn/project/blob/master/filename</li>
+      </ul>
+    </div>
+
+    <footer class="footer">
+      <p>基于 Cloudflare Workers 构建 · <a href="https://github.com/hunshcn/gh-proxy">开源项目</a></p>
+    </footer>
+  </main>
+
+  <script>
+    function toSubmit(e) {
+      e.preventDefault();
+      window.open(location.href.substr(0, location.href.lastIndexOf('/') + 1) + document.getElementsByName('q')[0].value);
+      return false;
+    }
+  </script>
 </body>
 </html>
