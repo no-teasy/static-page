@@ -135,103 +135,6 @@
       margin-bottom: 32px;
     }
 
-    /* Tech Stack */
-    .tech-row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .tech-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      font-size: 14px;
-      color: var(--text-1);
-      transition: all 0.2s var(--easing);
-    }
-
-    .tech-chip:hover {
-      border-color: var(--blue);
-      box-shadow: 0 2px 8px rgba(66,133,244,0.12);
-    }
-
-    .tech-chip .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-    }
-
-    /* Projects */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-
-    .project-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.25s var(--easing);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--blue), var(--green));
-      opacity: 0;
-      transition: opacity 0.25s;
-    }
-
-    .project-card:hover {
-      border-color: transparent;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-      transform: translateY(-2px);
-    }
-
-    .project-card:hover::before { opacity: 1; }
-
-    .project-card h3 {
-      font-size: 17px;
-      font-weight: 500;
-      margin-bottom: 8px;
-    }
-
-    .project-card p {
-      font-size: 14px;
-      color: var(--text-2);
-      line-height: 1.6;
-    }
-
-    .project-tags {
-      display: flex;
-      gap: 8px;
-      margin-top: 16px;
-      flex-wrap: wrap;
-    }
-
-    .project-tags span {
-      font-size: 12px;
-      padding: 3px 10px;
-      border-radius: 100px;
-      background: rgba(66,133,244,0.08);
-      color: var(--blue);
-    }
-
     /* Links */
     .links-row {
       display: flex;
@@ -312,7 +215,6 @@
       .wrap { padding: 0 20px; }
       .hero h1 { font-size: 36px; }
       .hero { padding: 64px 0 48px; }
-      .projects-grid { grid-template-columns: 1fr; }
       .links-row { flex-direction: column; }
       footer { flex-direction: column; gap: 16px; text-align: center; }
     }
@@ -323,8 +225,6 @@
     <nav>
       <a href="#" class="brand">noteasy<span>.</span></a>
       <div class="nav-links">
-        <a href="#projects">项目</a>
-        <a href="#stack">技术栈</a>
         <a href="#contact">联系</a>
       </div>
     </nav>
@@ -336,58 +236,6 @@
       </div>
       <h1>构建优雅的<br><span class="gradient">数字体验</span></h1>
       <p>嗨，我是 noteasy。一名热爱编程的开发者，专注于后端架构与全栈开发，喜欢用代码解决有趣的问题。</p>
-    </section>
-
-    <section class="section" id="stack">
-      <p class="section-label">技术栈</p>
-      <div class="tech-row">
-        <div class="tech-chip"><span class="dot" style="background:var(--blue)"></span>Go</div>
-        <div class="tech-chip"><span class="dot" style="background:var(--green)"></span>Python</div>
-        <div class="tech-chip"><span class="dot" style="background:var(--yellow)"></span>JavaScript</div>
-        <div class="tech-chip"><span class="dot" style="background:var(--red)"></span>Rust</div>
-        <div class="tech-chip"><span class="dot" style="background:var(--blue)"></span>Docker</div>
-        <div class="tech-chip"><span class="dot" style="background:var(--green)"></span>Linux</div>
-        <div class="tech-chip"><span class="dot" style="background:var(--yellow)"></span>PostgreSQL</div>
-        <div class="tech-chip"><span class="dot" style="background:var(--red)"></span>Redis</div>
-      </div>
-    </section>
-
-    <section class="section" id="projects">
-      <p class="section-label">项目</p>
-      <div class="projects-grid">
-        <a href="#" class="project-card">
-          <h3>项目名称</h3>
-          <p>简洁的项目描述，说明核心功能和价值</p>
-          <div class="project-tags">
-            <span>Go</span>
-            <span>gRPC</span>
-          </div>
-        </a>
-        <a href="#" class="project-card">
-          <h3>另一个项目</h3>
-          <p>用一句话概括这个项目解决了什么问题</p>
-          <div class="project-tags">
-            <span>Python</span>
-            <span>FastAPI</span>
-          </div>
-        </a>
-        <a href="#" class="project-card">
-          <h3>开源工具</h3>
-          <p>提升开发效率的命令行工具或库</p>
-          <div class="project-tags">
-            <span>Rust</span>
-            <span>CLI</span>
-          </div>
-        </a>
-        <a href="#" class="project-card">
-          <h3>Side Project</h3>
-          <p>业余时间做的一些有趣的实验性项目</p>
-          <div class="project-tags">
-            <span>TypeScript</span>
-            <span>React</span>
-          </div>
-        </a>
-      </div>
     </section>
 
     <section class="section" id="contact">
